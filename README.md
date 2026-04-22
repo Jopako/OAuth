@@ -28,13 +28,17 @@ cd Oauth
 npm install
 ```
 
-### 2) Configurar o Client ID do Google
+### 2) Client ID do Google (para rodar local / fazer fork)
 
-Atualmente o Client ID está definido diretamente no código em `Oauth/src/App.jsx` (constante `GOOGLE_CLIENT_ID`). Troque pelo seu Client ID do Google Cloud.
+Se você só vai **acessar a aplicação já publicada**, pode ignorar esta etapa.
+
+Se você for **rodar localmente** (ou fizer um fork/deploy em outro domínio), você precisa de um **OAuth Client ID (Web)** configurado no Google Cloud e colocar o valor no código em `Oauth/src/App.jsx` (constante `GOOGLE_CLIENT_ID`).
 
 No Google Cloud Console, ao criar uma credencial “OAuth client ID” (Web), adicione pelo menos este origin para dev:
 
 - `http://localhost:5173`
+
+Se você publicar em um domínio próprio, adicione também o origin do seu site (ex.: `https://seu-dominio.com`).
 
 ### 3) Rodar
 
