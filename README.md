@@ -1,16 +1,56 @@
-# React + Vite
+# FunkoVault — Teste de autenticação com Google
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto de estudo para testar **AUTH/autorização via Google**, simulando um site de Funko Pop chamado **FunkoVault**. O principal ponto é permitir que o usuário **faça login com a conta Google** e, após autenticar, acesse a experiência “logada” do app.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React + Vite
+- Node.js (ambiente de dev/build)
+- Google Identity Services (GSI) no front-end
 
-## React Compiler
+## O que foi implementado
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Login com Google (render do botão do Google na tela de login)
+- Decodificação do JWT (dados básicos do usuário: nome, email, foto)
+- Sessão simples no `sessionStorage` com expiração (1h)
+- Logout limpando sessão + revogando e desabilitando auto-select do Google
 
-## Expanding the ESLint configuration
+## Como rodar localmente
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Pré-requisitos
+
+- Node.js 18+ (recomendado)
+
+### 1) Instalar dependências
+
+```bash
+cd Oauth
+npm install
+```
+
+### 2) Configurar o Client ID do Google
+
+Atualmente o Client ID está definido diretamente no código em `Oauth/src/App.jsx` (constante `GOOGLE_CLIENT_ID`). Troque pelo seu Client ID do Google Cloud.
+
+No Google Cloud Console, ao criar uma credencial “OAuth client ID” (Web), adicione pelo menos este origin para dev:
+
+- `http://localhost:5173`
+
+### 3) Rodar
+
+```bash
+npm run dev
+```
+
+Abra a URL mostrada no terminal (normalmente `http://localhost:5173`).
+
+## Build/preview
+
+```bash
+npm run build
+npm run preview
+```
+
+## Observações
+
+- Este projeto é focado em **teste de autenticação no front-end**. Para produção, o ideal é validar tokens no backend e evitar usar apenas armazenamento/sessão do navegador como fonte de verdade.
